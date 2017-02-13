@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EztePaquetitoRico;
+package E12;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +21,10 @@ public class Main {
        Ex2 e = new Ex2();
        e.escribir();
        e.met();
+       e.buscaPerNom("ProductoEjemplo");
+       e.buscaPerCodi(1);
+       e.modificarRegistre(1, 4, 100);
+       e.mostrarRegistre();
        }
     
 }

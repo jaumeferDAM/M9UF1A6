@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package m6uf1a1;
+package E11;
 
 import java.io.BufferedWriter;
 import java.io.File;
