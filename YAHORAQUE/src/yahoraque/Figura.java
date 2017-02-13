@@ -9,7 +9,7 @@ package yahoraque;
  *
  * @author ALUMNEDAM
  */
-public abstract class Figura {
+public abstract class Figura implements Comparable<Figura>{
 
     private String nom;
 
@@ -30,4 +30,9 @@ public abstract class Figura {
     public abstract double area();
 
     public abstract double perimetre();
+
+    @Override
+    public abstract int compareTo(Figura o);
+    
+    
 }
