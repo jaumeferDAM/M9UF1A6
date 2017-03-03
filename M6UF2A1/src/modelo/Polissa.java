@@ -10,9 +10,14 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,32 +28,35 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ALUMNEDAM
  */
 @Entity
-@Table(name = "POLISSA")
+@Table(name = "M6UF2_POLISSA")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Polissa.findAll", query = "SELECT p FROM Polissa p"),
-    @NamedQuery(name = "Polissa.findById", query = "SELECT p FROM Polissa p WHERE p.id = :id"),
-    @NamedQuery(name = "Polissa.findByNumero", query = "SELECT p FROM Polissa p WHERE p.numero = :numero"),
-    @NamedQuery(name = "Polissa.findByPrenedor", query = "SELECT p FROM Polissa p WHERE p.prenedor = :prenedor"),
-    @NamedQuery(name = "Polissa.findByVehicle", query = "SELECT p FROM Polissa p WHERE p.vehicle = :vehicle"),
-    @NamedQuery(name = "Polissa.findByDataInici", query = "SELECT p FROM Polissa p WHERE p.dataInici = :dataInici"),
-    @NamedQuery(name = "Polissa.findByDataFi", query = "SELECT p FROM Polissa p WHERE p.dataFi = :dataFi"),
-    @NamedQuery(name = "Polissa.findByTipus", query = "SELECT p FROM Polissa p WHERE p.tipus = :tipus")})
+//@NamedQueries({
+//    @NamedQuery(name = "Polissa.findAll", query = "SELECT p FROM Polissa p"),
+//    @NamedQuery(name = "Polissa.findById", query = "SELECT p FROM Polissa p WHERE p.id = :id"),
+//    @NamedQuery(name = "Polissa.findByNumero", query = "SELECT p FROM Polissa p WHERE p.numero = :numero"),
+//    @NamedQuery(name = "Polissa.findByPrenedor", query = "SELECT p FROM Polissa p WHERE p.prenedor = :prenedor"),
+//    @NamedQuery(name = "Polissa.findByVehicle", query = "SELECT p FROM Polissa p WHERE p.vehicle = :vehicle"),
+//    @NamedQuery(name = "Polissa.findByDataInici", query = "SELECT p FROM Polissa p WHERE p.dataInici = :dataInici"),
+//    @NamedQuery(name = "Polissa.findByDataFi", query = "SELECT p FROM Polissa p WHERE p.dataFi = :dataFi"),
+//    @NamedQuery(name = "Polissa.findByTipus", query = "SELECT p FROM Polissa p WHERE p.tipus = :tipus")})
 public class Polissa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
-    private String id;
+    private int id;
     @Column(name = "NUMERO")
     private String numero;
     @Basic(optional = false)
-    @Column(name = "PRENEDOR")
-    private String prenedor;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_CLIENTE")
+    private Cliente prenedor;
     @Basic(optional = false)
-    @Column(name = "VEHICLE")
-    private String vehicle;
+     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID")
+    private Vehicles vehicle;
     @Basic(optional = false)
     @Column(name = "DATA_INICI")
     @Temporal(TemporalType.TIMESTAMP)
@@ -58,16 +66,19 @@ public class Polissa implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFi;
     @Column(name = "TIPUS")
-    private String tipus;
+    private Enum tipus;
+    @Column(name = "PRIMA")
+    private float prima;
+    
 
     public Polissa() {
     }
 
-    public Polissa(String id) {
+    public Polissa(int id) {
         this.id = id;
     }
 
-    public Polissa(String id, String prenedor, String vehicle, Date dataInici, Date dataFi) {
+    public Polissa(int id, Cliente prenedor, Vehicles vehicle, Date dataInici, Date dataFi) {
         this.id = id;
         this.prenedor = prenedor;
         this.vehicle = vehicle;
@@ -75,12 +86,23 @@ public class Polissa implements Serializable {
         this.dataFi = dataFi;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public Polissa(int id, String numero, Cliente prenedor, Vehicles vehicle, Date dataInici, Date dataFi, Enum tipus, float prima) {
+        this.id = id;
+        this.numero = numero;
+        this.prenedor = prenedor;
+        this.vehicle = vehicle;
+        this.dataInici = dataInici;
+        this.dataFi = dataFi;
+        this.tipus = tipus;
+        this.prima = prima;
     }
 
     public String getNumero() {
@@ -91,19 +113,27 @@ public class Polissa implements Serializable {
         this.numero = numero;
     }
 
-    public String getPrenedor() {
+    public Cliente getPrenedor() {
         return prenedor;
     }
 
-    public void setPrenedor(String prenedor) {
+    public float getPrima() {
+        return prima;
+    }
+
+    public void setPrima(float prima) {
+        this.prima = prima;
+    }
+
+    public void setPrenedor(Cliente prenedor) {
         this.prenedor = prenedor;
     }
 
-    public String getVehicle() {
+    public Vehicles getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(String vehicle) {
+    public void setVehicle(Vehicles vehicle) {
         this.vehicle = vehicle;
     }
 
@@ -123,33 +153,42 @@ public class Polissa implements Serializable {
         this.dataFi = dataFi;
     }
 
-    public String getTipus() {
+    public Enum getTipus() {
         return tipus;
     }
 
-    public void setTipus(String tipus) {
+    public void setTipus(Enum tipus) {
         this.tipus = tipus;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 53 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Polissa)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Polissa other = (Polissa) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Polissa other = (Polissa) obj;
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
+
+  
+
+    
 
     @Override
     public String toString() {

@@ -19,7 +19,7 @@ import modelo.*;
  *
  * @author Jorge
  */
-public class Controller {
+public class Cliente_controller {
 
     public void Insertar(Cliente cliente1) {
         // Recupera el entity manager
@@ -27,7 +27,7 @@ public class Controller {
         EntityManager em = oem.getEntityManager();
 
         // El persistim a la base de dades
-        em.getTransaction().begin();
+//        em.getTransaction().begin();
         EntityTransaction etx = em.getTransaction();
 
         System.out.println("begin");
@@ -90,7 +90,7 @@ public class Controller {
         em.close();
     }
 
-    public Cliente Buscar(Long id) {
+    public Cliente Buscar(short id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 

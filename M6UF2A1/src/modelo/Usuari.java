@@ -6,44 +6,85 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
  * @author ALUMNEDAM
  */
-
 @Entity
 //@NamedQueries({
 //@NamedQuery(name="PersonaNombre", query="SELECT p FROM M6UF2_PERSONES p WHERE p.nombre=:nombre")})
-@Table(name = "M6UF2_PRACTICA")
-public class Usuari implements Serializable{
-    
+//@NamedQuery(name = Usuari.CONSULTA, query = "SELECT u FROM Usuaris u WHERE u.nom=:nom")})
+@Table(name = "M6UF2_USUARI")
+public class Usuari implements Serializable {
+
+    public static final String CONSULTA = "UsuariNombre";
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "nom", length = 30)
-    private String nom;
+    @Column(name = "nom", length = 30)
+    private String usuari;
 
     @Column(length = 30, nullable = false)
-    private String carrer;
-    
-    
-    
-    
-    
+    private String password;
+
+    public Usuari(String usuari, String password) {
+        this.usuari = usuari;
+        this.password = password;
+    }
+
+    public Usuari() {
+    }
+
     public String getNom() {
-        return nom;
+        return usuari;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.usuari = nom;
     }
-    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.usuari);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuari other = (Usuari) obj;
+        if (!Objects.equals(this.usuari, other.usuari)) {
+            return false;
+        }
+        return true;
+    }
+
 }

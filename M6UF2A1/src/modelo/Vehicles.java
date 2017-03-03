@@ -7,12 +7,19 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import javax.annotation.Generated;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,21 +28,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ALUMNEDAM
  */
 @Entity
-@Table(name = "VEHICLES")
+@Table(name = "M6UF2_VEHICLES")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Vehicles.findAll", query = "SELECT v FROM Vehicles v"),
-    @NamedQuery(name = "Vehicles.findById", query = "SELECT v FROM Vehicles v WHERE v.id = :id"),
-    @NamedQuery(name = "Vehicles.findByModel", query = "SELECT v FROM Vehicles v WHERE v.model = :model"),
-    @NamedQuery(name = "Vehicles.findByMatricula", query = "SELECT v FROM Vehicles v WHERE v.matricula = :matricula"),
-    @NamedQuery(name = "Vehicles.findByAnyfabricacio", query = "SELECT v FROM Vehicles v WHERE v.anyfabricacio = :anyfabricacio"),
-    @NamedQuery(name = "Vehicles.findByPropietari", query = "SELECT v FROM Vehicles v WHERE v.propietari = :propietari"),
-    @NamedQuery(name = "Vehicles.findByMarca", query = "SELECT v FROM Vehicles v WHERE v.marca = :marca")})
+//@NamedQueries({
+//    @NamedQuery(name = "Vehicles.findAll", query = "SELECT v FROM Vehicles v"),
+//    @NamedQuery(name = "Vehicles.findById", query = "SELECT v FROM Vehicles v WHERE v.id = :id"),
+//    @NamedQuery(name = "Vehicles.findByModel", query = "SELECT v FROM Vehicles v WHERE v.model = :model"),
+//    @NamedQuery(name = "Vehicles.findByMatricula", query = "SELECT v FROM Vehicles v WHERE v.matricula = :matricula"),
+//    @NamedQuery(name = "Vehicles.findByAnyfabricacio", query = "SELECT v FROM Vehicles v WHERE v.anyfabricacio = :anyfabricacio"),
+//    @NamedQuery(name = "Vehicles.findByPropietari", query = "SELECT v FROM Vehicles v WHERE v.propietari = :propietari"),
+//    @NamedQuery(name = "Vehicles.findByMarca", query = "SELECT v FROM Vehicles v WHERE v.marca = :marca")})
 public class Vehicles implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private String id;
     @Column(name = "MODEL")
@@ -45,8 +53,9 @@ public class Vehicles implements Serializable {
     private String matricula;
     @Column(name = "ANYFABRICACIO")
     private BigInteger anyfabricacio;
-    @Column(name = "PROPIETARI")
-    private String propietari;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_CLIENTE")
+    private Cliente propietari;
     @Column(name = "MARCA")
     private String marca;
 
@@ -94,11 +103,11 @@ public class Vehicles implements Serializable {
         this.anyfabricacio = anyfabricacio;
     }
 
-    public String getPropietari() {
+    public Cliente getPropietari() {
         return propietari;
     }
 
-    public void setPropietari(String propietari) {
+    public void setPropietari(Cliente propietari) {
         this.propietari = propietari;
     }
 
