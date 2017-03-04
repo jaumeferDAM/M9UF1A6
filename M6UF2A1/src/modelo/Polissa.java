@@ -55,7 +55,7 @@ public class Polissa implements Serializable {
     private Cliente prenedor;
     @Basic(optional = false)
      @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "ID_VEHICLE")
     private Vehicles vehicle;
     @Basic(optional = false)
     @Column(name = "DATA_INICI")
