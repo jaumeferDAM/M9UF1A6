@@ -54,7 +54,7 @@ public class Vehicles implements Serializable {
     private String matricula;
     @Column(name = "ANYFABRICACIO")
     private int anyfabricacio;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ID_CLIENTE")
     private Cliente propietari;
     @Column(name = "MARCA")

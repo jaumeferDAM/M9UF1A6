@@ -81,7 +81,7 @@ public class M6UF2A1 {
         controller.Insertar(polissa1);
 //        v.Insertar(vehicle1);
         
-//        controller_cliente.Buscar(1);
+//        controller_cliente.Insertar(cliente1);
 //        controller.Buscar((short)1);
 
     }

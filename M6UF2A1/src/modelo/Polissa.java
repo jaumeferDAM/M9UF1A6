@@ -49,13 +49,13 @@ public class Polissa implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "POLISSA_ID")
+    @Column(name = "ID")
     private int id;
     @Column(name = "NUMERO")
     private String numero;
     @Basic(optional = false)
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name = "ID_CLIENTE")
     private Cliente prenedor;
     @Basic(optional = false)
     @OneToOne(fetch = FetchType.EAGER)
