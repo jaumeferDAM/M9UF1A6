@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Objects;
 import javax.annotation.Generated;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -45,37 +46,60 @@ public class Vehicles implements Serializable {
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private String id;
+    private int id;
     @Column(name = "MODEL")
     private String model;
     @Basic(optional = false)
     @Column(name = "MATRICULA")
     private String matricula;
     @Column(name = "ANYFABRICACIO")
-    private BigInteger anyfabricacio;
-    @OneToOne(fetch = FetchType.LAZY)
+    private int anyfabricacio;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_CLIENTE")
     private Cliente propietari;
     @Column(name = "MARCA")
     private String marca;
+    @OneToOne
+    @JoinColumn(name = "POLISSA")
+    private Polissa polissa;
 
+    public Vehicles(int id, String model, String matricula, int anyfabricacio, Cliente propietari, String marca, Polissa polissa) {
+        this.id = id;
+        this.model = model;
+        this.matricula = matricula;
+        this.anyfabricacio = anyfabricacio;
+        this.propietari = propietari;
+        this.marca = marca;
+        this.polissa = polissa;
+    }
+
+    public Polissa getPolissa() {
+        return polissa;
+    }
+
+    public void setPolissa(Polissa polissa) {
+        this.polissa = polissa;
+    }
+
+    
+    
     public Vehicles() {
     }
 
-    public Vehicles(String id) {
+    public Vehicles(int id) {
         this.id = id;
     }
 
-    public Vehicles(String id, String matricula) {
+    public Vehicles(int id, String matricula) {
         this.id = id;
         this.matricula = matricula;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -95,11 +119,11 @@ public class Vehicles implements Serializable {
         this.matricula = matricula;
     }
 
-    public BigInteger getAnyfabricacio() {
+    public int getAnyfabricacio() {
         return anyfabricacio;
     }
 
-    public void setAnyfabricacio(BigInteger anyfabricacio) {
+    public void setAnyfabricacio(int anyfabricacio) {
         this.anyfabricacio = anyfabricacio;
     }
 
@@ -121,19 +145,24 @@ public class Vehicles implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vehicles)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Vehicles other = (Vehicles) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vehicles other = (Vehicles) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -141,7 +170,8 @@ public class Vehicles implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Vehicles[ id=" + id + " ]";
+        return "Vehicles{" + "id=" + id + ", model=" + model + ", matricula=" + matricula + ", anyfabricacio=" + anyfabricacio + ", propietari=" + propietari + ", marca=" + marca + ", polissa=" + polissa + '}';
     }
+
     
 }

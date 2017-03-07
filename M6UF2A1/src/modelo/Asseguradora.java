@@ -6,12 +6,16 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -38,6 +42,28 @@ public class Asseguradora implements Serializable {
     private String nom;
     @Column(name = "NIF")
     private String nif;
+  
+    @OneToMany
+    @JoinColumn(name = "Polissa")
+    private List<Polissa> polissa;
+
+    public Asseguradora(String id, String nom, String nif) {
+        this.id = id;
+        this.nom = nom;
+        this.nif = nif;
+    }
+
+    public List<Polissa> getPolissa() {
+        return polissa;
+    }
+
+    public void setPolissa(List<Polissa> polissa) {
+        this.polissa = polissa;
+    }
+
+    
+    
+    
 
     public Asseguradora() {
     }
@@ -72,19 +98,24 @@ public class Asseguradora implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Asseguradora)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Asseguradora other = (Asseguradora) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Asseguradora other = (Asseguradora) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -92,7 +123,9 @@ public class Asseguradora implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Asseguradora[ id=" + id + " ]";
+        return "Asseguradora{" + "id=" + id + ", nom=" + nom + ", nif=" + nif + ", polissa=" + polissa + '}';
     }
+
+    
     
 }

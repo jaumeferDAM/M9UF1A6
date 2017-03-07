@@ -90,7 +90,7 @@ public class Cliente_controller {
         em.close();
     }
 
-    public Cliente Buscar(short id) {
+    public Cliente Buscar (int id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
@@ -127,7 +127,7 @@ public class Cliente_controller {
         }
     }
 
-    public void imprimirPersona(Cliente c) {
+    public void imprimirCliente(Cliente c) {
         System.out.println(c);
     }
 }

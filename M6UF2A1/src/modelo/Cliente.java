@@ -6,6 +6,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
 import javax.persistence.Basic;
@@ -19,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,16 +51,23 @@ public class Cliente implements Serializable {
     private Long telefono;
     @Embedded
     private Adreca adreca;
-    @OneToOne(mappedBy = "propietari")
-    private Vehicles vehicles;
+    @OneToMany(mappedBy = "propietari")
+    private List<Vehicles> vehicles;
+    @OneToOne
+    @JoinColumn(name = "POLISSA_ID")
+    private Polissa polissa;
 
-    public Vehicles getVehicles() {
+    public List<Vehicles> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(Vehicles vehicles) {
+    public void setVehicles(List<Vehicles> vehicles) {
         this.vehicles = vehicles;
     }
+
+ 
+
+   
 
 
     
@@ -78,6 +88,14 @@ public class Cliente implements Serializable {
         this.adreca = adreca;
     }
 
+    public Cliente(int idCliente, String nombre, Long telefono, Adreca adreca, ArrayList<Vehicles> vehicles) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.adreca = adreca;
+        this.vehicles = vehicles;
+    }
+    
     
     public Cliente() {
     }
@@ -112,12 +130,10 @@ public class Cliente implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.idCliente;
+        int hash = 3;
+        hash = 67 * hash + this.idCliente;
         return hash;
     }
-
-   
 
     @Override
     public boolean equals(Object obj) {
@@ -131,15 +147,17 @@ public class Cliente implements Serializable {
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.idCliente, other.idCliente)) {
+        if (this.idCliente != other.idCliente) {
             return false;
         }
-return true;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "modelo.Cliente[ idCliente=" + idCliente + " ]";
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", adreca=" + adreca + ", vehicles=" + vehicles + '}';
     }
+
+    
     
 }
