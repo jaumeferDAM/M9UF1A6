@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,17 +38,16 @@ public class Asseguradora implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private String id;
+    private int id;
     @Column(name = "NOM")
     private String nom;
     @Column(name = "NIF")
     private String nif;
-  
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "Polissa")
     private List<Polissa> polissa;
 
-    public Asseguradora(String id, String nom, String nif) {
+    public Asseguradora(int id, String nom, String nif) {
         this.id = id;
         this.nom = nom;
         this.nif = nif;
@@ -68,15 +68,15 @@ public class Asseguradora implements Serializable {
     public Asseguradora() {
     }
 
-    public Asseguradora(String id) {
+    public Asseguradora(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

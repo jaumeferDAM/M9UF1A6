@@ -53,7 +53,7 @@ public class Cliente implements Serializable {
     private Adreca adreca;
     @OneToMany(mappedBy = "propietari")
     private List<Vehicles> vehicles;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POLISSA_ID")
     private Polissa polissa;
 
@@ -115,6 +115,15 @@ public class Cliente implements Serializable {
     public String getNombre() {
         return nombre;
     }
+
+    public Polissa getPolissa() {
+        return polissa;
+    }
+
+    public void setPolissa(Polissa polissa) {
+        this.polissa = polissa;
+    }
+    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.util.Objects;
 import javax.annotation.Generated;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,7 +55,7 @@ public class Vehicles implements Serializable {
     private String matricula;
     @Column(name = "ANYFABRICACIO")
     private int anyfabricacio;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CLIENTE")
     private Cliente propietari;
     @Column(name = "MARCA")

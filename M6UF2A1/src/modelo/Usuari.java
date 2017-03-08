@@ -31,11 +31,11 @@ public class Usuari implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "nom", length = 30)
     private String usuari;
 
-    @Column(length = 30, nullable = false)
+    @Column(name = "password",length = 30, nullable = false)
     private String password;
 
     public Usuari(String usuari, String password) {
@@ -65,8 +65,7 @@ public class Usuari implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.usuari);
-        hash = 47 * hash + Objects.hashCode(this.password);
+        hash = 71 * hash + Objects.hashCode(this.password);
         return hash;
     }
 
@@ -82,9 +81,6 @@ public class Usuari implements Serializable {
             return false;
         }
         final Usuari other = (Usuari) obj;
-        if (!Objects.equals(this.usuari, other.usuari)) {
-            return false;
-        }
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
@@ -95,6 +91,8 @@ public class Usuari implements Serializable {
     public String toString() {
         return "Usuari{" + "usuari=" + usuari + ", password=" + password + '}';
     }
+
+    
 
     
 
