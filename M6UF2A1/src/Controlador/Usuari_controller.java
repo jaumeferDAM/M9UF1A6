@@ -85,7 +85,7 @@ public class Usuari_controller {
         em.close();
     }
 
-    public Usuari Buscar(short id) {
+    public Usuari Buscar(int id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 

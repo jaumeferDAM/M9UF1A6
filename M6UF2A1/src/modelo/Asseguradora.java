@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -36,6 +38,7 @@ public class Asseguradora implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private int id;
@@ -47,17 +50,26 @@ public class Asseguradora implements Serializable {
     @JoinColumn(name = "Polissa")
     private List<Polissa> polissa;
 
-    public Asseguradora(int id, String nom, String nif) {
-        this.id = id;
-        this.nom = nom;
-        this.nif = nif;
-    }
+    
 
     public List<Polissa> getPolissa() {
         return polissa;
     }
 
     public void setPolissa(List<Polissa> polissa) {
+        this.polissa = polissa;
+    }
+
+        public Asseguradora(String nom, String nif, List<Polissa> polissa) {
+        this.nom = nom;
+        this.nif = nif;
+        this.polissa = polissa;
+    }
+
+    public Asseguradora(int id, String nom, String nif, List<Polissa> polissa) {
+        this.id = id;
+        this.nom = nom;
+        this.nif = nif;
         this.polissa = polissa;
     }
 
@@ -123,8 +135,10 @@ public class Asseguradora implements Serializable {
 
     @Override
     public String toString() {
-        return "Asseguradora{" + "id=" + id + ", nom=" + nom + ", nif=" + nif + ", polissa=" + polissa + '}';
+        return "Asseguradora{" + "id=" + id + ", nom=" + nom + ", nif=" + nif + '}';
     }
+
+    
 
     
     

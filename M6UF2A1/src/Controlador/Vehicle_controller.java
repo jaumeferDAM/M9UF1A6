@@ -85,7 +85,7 @@ public class Vehicle_controller {
         em.close();
     }
 
-    public Vehicles Buscar(short id) {
+    public Vehicles Buscar(int id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 

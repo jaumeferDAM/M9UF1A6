@@ -195,8 +195,10 @@ public class Polissa implements Serializable {
 
     @Override
     public String toString() {
-        return "Polissa{" + "id=" + id + ", numero=" + numero + ", prenedor=" + prenedor + ", vehicle=" + vehicle + ", dataInici=" + dataInici + ", dataFi=" + dataFi + ", tipus=" + tipus + ", prima=" + prima + '}';
+        return "Polissa{" + "id=" + id + ", numero=" + numero + ", dataInici=" + dataInici + ", dataFi=" + dataFi + ", prima=" + prima + '}';
     }
+
+    
 
     
 }

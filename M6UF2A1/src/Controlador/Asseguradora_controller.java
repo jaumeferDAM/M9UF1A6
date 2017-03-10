@@ -85,7 +85,7 @@ public class Asseguradora_controller {
         em.close();
     }
 
-    public Asseguradora Buscar(short id) {
+    public Asseguradora Buscar(int id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 

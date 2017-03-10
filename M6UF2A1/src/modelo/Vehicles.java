@@ -171,8 +171,10 @@ public class Vehicles implements Serializable {
 
     @Override
     public String toString() {
-        return "Vehicles{" + "id=" + id + ", model=" + model + ", matricula=" + matricula + ", anyfabricacio=" + anyfabricacio + ", propietari=" + propietari + ", marca=" + marca + ", polissa=" + polissa + '}';
+        return "Vehicles{" + "id=" + id + ", model=" + model + ", matricula=" + matricula + ", anyfabricacio=" + anyfabricacio + ", marca=" + marca + '}';
     }
+
+    
 
     
 }

@@ -10,6 +10,7 @@ import Controlador.Cliente_controller;
 import Controlador.Polissa_Controller;
 import Controlador.Usuari_controller;
 import Controlador.Vehicle_controller;
+import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -22,6 +23,11 @@ import modelo.Cliente;
 import modelo.Polissa;
 import modelo.Usuari;
 import modelo.Vehicles;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.internal.SessionFactoryImpl;
 
 /**
  *
@@ -37,6 +43,10 @@ public class M6UF2A1 {
         Cliente_controller controller_cliente = new Cliente_controller();
         Asseguradora_controller asseguradora_controller = new Asseguradora_controller();
         Usuari_controller usuari_Controller = new Usuari_controller();
+        Vehicle_controller v = new Vehicle_controller();
+        Polissa_Controller controller = new Polissa_Controller();
+        
+        
         Cliente cliente2 = new Cliente();
         cliente2.setNombre("Jaume");
         cliente2.setIdCliente(0);
@@ -83,26 +93,23 @@ public class M6UF2A1 {
         
         
         cliente2.setPolissa(polissa1);
+        cliente2.setDNI("83982933N");
 //        
 //        TIPODESEGURO TOT_RISC = TIPODESEGURO.TOT_RISC;
 //        polissa1.setTipus(TOT_RISC);
 //        polissa1.setVehicle(vehicle1);
 
 //        
+//        controller_cliente.Insertar(cliente2);
         Usuari usuari1 = new Usuari();
         usuari1.setNom("Moreno");
         usuari1.setPassword("1234");
-//        controller_cliente.Insertar(cliente1);
-        Vehicle_controller v = new Vehicle_controller();
-        Polissa_Controller controller = new Polissa_Controller();
-//        controller.Insertar(polissa1);
-//        v.Insertar(vehicle1);
-//           asseguradora_controller.Insertar(asseguradora1);
-//            usuari_Controller.Insertar(usuari1);
-            Vehicles vehicle2 = new Vehicles(0, "IMPREZA", "343434-BC", 2001, cliente2, "SUBARU", polissa1);
-            v.Insertar(vehicle2);
-//        controller_cliente.Insertar(cliente2);
-//        controller.Buscar((short)1);
+        
+//        Asseguradora as = new Asseguradora(1201,"oTRAASEGURADO", "24",polisses);
+//        asseguradora_controller.Modificar(as);
+//        asseguradora_controller.Eliminar(as);
+            
+            System.out.println(controller_cliente.obtenerPolissesClients("Jaume"));
 
     }
     

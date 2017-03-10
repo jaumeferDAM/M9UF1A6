@@ -85,7 +85,7 @@ public class Polissa_Controller {
         em.close();
     }
 
-    public Polissa Buscar(short id) {
+    public Polissa Buscar(int id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 

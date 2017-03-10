@@ -32,10 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "M6UF2_CLIENTE")
-//@NamedQueries({
-//    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
-//    @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
-//    @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre"),
+@NamedQueries({
+    //    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
+    //    @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
+    @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Cliente.BuscarPolisses", query = "SELECT c.polissa FROM Cliente c WHERE c.nombre = :nombre")})
 //    @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono")})
 public class Cliente implements Serializable {
 
@@ -56,6 +57,8 @@ public class Cliente implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POLISSA_ID")
     private Polissa polissa;
+    @Column(name = "DNI")
+    private String DNI;
 
     public List<Vehicles> getVehicles() {
         return vehicles;
@@ -65,14 +68,6 @@ public class Cliente implements Serializable {
         this.vehicles = vehicles;
     }
 
- 
-
-   
-
-
-    
-    
-    
     public Adreca getAdreca() {
         return adreca;
     }
@@ -95,8 +90,7 @@ public class Cliente implements Serializable {
         this.adreca = adreca;
         this.vehicles = vehicles;
     }
-    
-    
+
     public Cliente() {
     }
 
@@ -123,7 +117,6 @@ public class Cliente implements Serializable {
     public void setPolissa(Polissa polissa) {
         this.polissa = polissa;
     }
-    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -142,6 +135,14 @@ public class Cliente implements Serializable {
         int hash = 3;
         hash = 67 * hash + this.idCliente;
         return hash;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
     @Override
@@ -164,9 +165,9 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", adreca=" + adreca + ", vehicles=" + vehicles + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", adreca=" + adreca + ", DNI=" + DNI + '}';
     }
+    
+   
 
-    
-    
 }

@@ -14,6 +14,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import modelo.*;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -90,21 +93,38 @@ public class Cliente_controller {
         em.close();
     }
 
-    public Cliente Buscar (int id) {
+    public Cliente buscar (int DNI) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
-
+       
         System.out.println("busqueda");
 //        Query query = em.createNamedQuery("Persona.personesPerCognom",Persona.class);
 //        query.setParameter("nombre", "Jorge");
 //        Persona p = (Persona) query.getSingleResult();
-        Cliente c = (Cliente) em.find(Cliente.class, id);
+        Cliente c = (Cliente) em.find(Cliente.class, DNI);
 
         System.out.println("close");
         em.close();
 
         return c;
     }
+     public Cliente buscarPorNombre (String nombre) {
+        // Recupera el entity manager
+        EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("busqueda");
+        Query query = em.createNamedQuery("Cliente.findByNombre",Cliente.class);
+        query.setParameter("nombre", nombre);
+        Cliente c = (Cliente) query.getSingleResult();
+//        Cliente c = (Cliente) em.find(Cliente.class, nombre);
+
+        System.out.println("close");
+        em.close();
+
+        return c;
+    }
+    
+    
 
     public void Consulta() {
         // Recupera el entity manager
@@ -120,6 +140,19 @@ public class Cliente_controller {
         em.close();
     }
 
+     public Cliente obtenerPolissesClients(String nombre) {
+         EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("busqueda");
+        Query query = em.createNamedQuery("Cliente.BuscarPolisses",Cliente.class);
+        query.setParameter("nombre", nombre);
+        Cliente c = (Cliente) query.getSingleResult();
+        System.out.println("close");
+        em.close();
+
+        return c;
+     }
+     
     public void imprimirLista(List<Cliente> lista) {
         System.out.println("Numero d'empleats= " + lista.size());
         for (int i = 0; i < lista.size(); i++) {
