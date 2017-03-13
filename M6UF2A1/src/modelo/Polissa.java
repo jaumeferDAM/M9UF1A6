@@ -34,20 +34,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "M6UF2_POLISSA")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "Polissa.findAll", query = "SELECT p FROM Polissa p"),
-//    @NamedQuery(name = "Polissa.findById", query = "SELECT p FROM Polissa p WHERE p.id = :id"),
-//    @NamedQuery(name = "Polissa.findByNumero", query = "SELECT p FROM Polissa p WHERE p.numero = :numero"),
-//    @NamedQuery(name = "Polissa.findByPrenedor", query = "SELECT p FROM Polissa p WHERE p.prenedor = :prenedor"),
-//    @NamedQuery(name = "Polissa.findByVehicle", query = "SELECT p FROM Polissa p WHERE p.vehicle = :vehicle"),
-//    @NamedQuery(name = "Polissa.findByDataInici", query = "SELECT p FROM Polissa p WHERE p.dataInici = :dataInici"),
-//    @NamedQuery(name = "Polissa.findByDataFi", query = "SELECT p FROM Polissa p WHERE p.dataFi = :dataFi"),
-//    @NamedQuery(name = "Polissa.findByTipus", query = "SELECT p FROM Polissa p WHERE p.tipus = :tipus")})
+@NamedQueries({
+    //    @NamedQuery(name = "Polissa.findAll", query = "SELECT p FROM Polissa p"),
+    //    @NamedQuery(name = "Polissa.findById", query = "SELECT p FROM Polissa p WHERE p.id = :id"),
+    //    @NamedQuery(name = "Polissa.findByNumero", query = "SELECT p FROM Polissa p WHERE p.numero = :numero"),
+    //    @NamedQuery(name = "Polissa.findByPrenedor", query = "SELECT p FROM Polissa p WHERE p.prenedor = :prenedor"),
+    //    @NamedQuery(name = "Polissa.findByVehicle", query = "SELECT p FROM Polissa p WHERE p.vehicle = :vehicle"),
+    @NamedQuery(name = "Polissa.findVigente", query = "SELECT p FROM Polissa p WHERE  p.dataInici < CURRENT_DATE AND p.dataFi > CURRENT_DATE"),
+    @NamedQuery(name = "Polissa.findVehicle", query = "SELECT p FROM Polissa p, Vehicles vehicle WHERE p.vehicle = vehicle.id AND vehicle.id = :idVehicle"),
+    @NamedQuery(name = "Polissa.findByTipus", query = "SELECT p FROM Polissa p,Cliente c WHERE p.prenedor = c.idCliente AND c.idCliente = :idCliente")})
 public class Polissa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private int id;
@@ -58,7 +58,7 @@ public class Polissa implements Serializable {
     @JoinColumn(name = "ID_CLIENTE")
     private Cliente prenedor;
     @Basic(optional = false)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_VEHICLE")
     private Vehicles vehicle;
     @Basic(optional = false)
@@ -76,7 +76,6 @@ public class Polissa implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ASSEGURADORAID")
     private Asseguradora asseguradora;
-    
 
     public Polissa() {
     }
@@ -198,7 +197,4 @@ public class Polissa implements Serializable {
         return "Polissa{" + "id=" + id + ", numero=" + numero + ", dataInici=" + dataInici + ", dataFi=" + dataFi + ", prima=" + prima + '}';
     }
 
-    
-
-    
 }

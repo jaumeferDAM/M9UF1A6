@@ -9,9 +9,6 @@ package modelo;
  *
  * @author ALUMNEDAM
  */
-
-    public enum TIPODESEGURO
-{
-    TERCERS,     TOT_RISC;
+public enum TIPODESEGURO {
+    TERCERS, TOT_RISC;
 }
-

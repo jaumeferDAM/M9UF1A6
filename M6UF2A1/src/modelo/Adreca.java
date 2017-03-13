@@ -17,14 +17,15 @@ import javax.persistence.Embeddable;
 public class Adreca implements Serializable {
 
     private static final long serialVersionUID = 1L;
-      @Column(name = "carrer", length = 50, nullable = false)
+    @Column(name = "carrer", length = 50, nullable = false)
     private String carrer;
 
     @Column(name = "numero", nullable = false)
     private int numero;
 
     @Column(name = "poblacio", length = 50, nullable = false)
-private String poblacio;
+    private String poblacio;
+
     public Adreca() {
     }
 
@@ -44,8 +45,6 @@ private String poblacio;
         this.numero = numero;
     }
 
-    
-
     public String getPoblacio() {
         return poblacio;
     }
@@ -54,5 +53,11 @@ private String poblacio;
         this.poblacio = poblacio;
     }
 
+    public Adreca(String carrer, int numero, String poblacio) {
+        this.carrer = carrer;
+        this.numero = numero;
+        this.poblacio = poblacio;
+    }
 
+    
 }

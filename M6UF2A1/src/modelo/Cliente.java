@@ -76,7 +76,7 @@ public class Cliente implements Serializable {
         this.adreca = adreca;
     }
 
-    public Cliente(Short idCliente, String nombre, Long telefono, Adreca adreca) {
+    public Cliente(int idCliente, String nombre, Long telefono, Adreca adreca) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -90,11 +90,13 @@ public class Cliente implements Serializable {
         this.adreca = adreca;
         this.vehicles = vehicles;
     }
+    
+    
 
     public Cliente() {
     }
 
-    public Cliente(Short idCliente) {
+    public Cliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -167,7 +169,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", adreca=" + adreca + ", DNI=" + DNI + '}';
     }
-    
-   
 
 }

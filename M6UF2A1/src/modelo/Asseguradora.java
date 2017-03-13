@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -38,7 +38,7 @@ public class Asseguradora implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private int id;
@@ -50,8 +50,6 @@ public class Asseguradora implements Serializable {
     @JoinColumn(name = "Polissa")
     private List<Polissa> polissa;
 
-    
-
     public List<Polissa> getPolissa() {
         return polissa;
     }
@@ -60,7 +58,7 @@ public class Asseguradora implements Serializable {
         this.polissa = polissa;
     }
 
-        public Asseguradora(String nom, String nif, List<Polissa> polissa) {
+    public Asseguradora(String nom, String nif, List<Polissa> polissa) {
         this.nom = nom;
         this.nif = nif;
         this.polissa = polissa;
@@ -72,10 +70,6 @@ public class Asseguradora implements Serializable {
         this.nif = nif;
         this.polissa = polissa;
     }
-
-    
-    
-    
 
     public Asseguradora() {
     }
@@ -138,8 +132,4 @@ public class Asseguradora implements Serializable {
         return "Asseguradora{" + "id=" + id + ", nom=" + nom + ", nif=" + nif + '}';
     }
 
-    
-
-    
-    
 }

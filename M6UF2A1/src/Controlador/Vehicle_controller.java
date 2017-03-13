@@ -16,7 +16,8 @@ import modelo.Vehicles;
  * @author Jaume
  */
 public class Vehicle_controller {
-     public void Insertar(Vehicles a) {
+
+    public void Insertar(Vehicles a) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();

@@ -93,10 +93,10 @@ public class Cliente_controller {
         em.close();
     }
 
-    public Cliente buscar (int DNI) {
+    public Cliente buscar(int DNI) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
-       
+
         System.out.println("busqueda");
 //        Query query = em.createNamedQuery("Persona.personesPerCognom",Persona.class);
 //        query.setParameter("nombre", "Jorge");
@@ -108,12 +108,13 @@ public class Cliente_controller {
 
         return c;
     }
-     public Cliente buscarPorNombre (String nombre) {
+
+    public Cliente buscarPorNombre(String nombre) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("busqueda");
-        Query query = em.createNamedQuery("Cliente.findByNombre",Cliente.class);
+        Query query = em.createNamedQuery("Cliente.findByNombre", Cliente.class);
         query.setParameter("nombre", nombre);
         Cliente c = (Cliente) query.getSingleResult();
 //        Cliente c = (Cliente) em.find(Cliente.class, nombre);
@@ -123,8 +124,6 @@ public class Cliente_controller {
 
         return c;
     }
-    
-    
 
     public void Consulta() {
         // Recupera el entity manager
@@ -140,19 +139,19 @@ public class Cliente_controller {
         em.close();
     }
 
-     public Cliente obtenerPolissesClients(String nombre) {
-         EntityManager em = new EM_Controller().getEntityManager();
+    public Cliente obtenerPolissesClients(String nombre) {
+        EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("busqueda");
-        Query query = em.createNamedQuery("Cliente.BuscarPolisses",Cliente.class);
+        Query query = em.createNamedQuery("Cliente.BuscarPolisses", Cliente.class);
         query.setParameter("nombre", nombre);
         Cliente c = (Cliente) query.getSingleResult();
         System.out.println("close");
         em.close();
 
         return c;
-     }
-     
+    }
+
     public void imprimirLista(List<Cliente> lista) {
         System.out.println("Numero d'empleats= " + lista.size());
         for (int i = 0; i < lista.size(); i++) {
@@ -164,4 +163,3 @@ public class Cliente_controller {
         System.out.println(c);
     }
 }
-

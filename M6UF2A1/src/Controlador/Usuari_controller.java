@@ -16,6 +16,7 @@ import modelo.Usuari;
  * @author Jaume
  */
 public class Usuari_controller {
+
     public void Insertar(Usuari u) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
@@ -124,5 +125,20 @@ public class Usuari_controller {
 
     public void imprimirUsuari(Usuari u) {
         System.out.println(u);
+    }
+
+    public Usuari Buscar(String usu) {
+        EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("busqueda");
+//        Query query = em.createNamedQuery("Persona.personesPerCognom",Persona.class);
+//        query.setParameter("nombre", "Jorge");
+//        Persona p = (Persona) query.getSingleResult();
+        Usuari u = (Usuari) em.find(Usuari.class, usu);
+
+        System.out.println("close");
+        em.close();
+
+        return u;
     }
 }

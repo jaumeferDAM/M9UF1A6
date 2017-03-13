@@ -35,7 +35,7 @@ public class Usuari implements Serializable {
     @Column(name = "nom", length = 30)
     private String usuari;
 
-    @Column(name = "password",length = 30, nullable = false)
+    @Column(name = "password", length = 30, nullable = false)
     private String password;
 
     public Usuari(String usuari, String password) {
@@ -91,9 +91,5 @@ public class Usuari implements Serializable {
     public String toString() {
         return "Usuari{" + "usuari=" + usuari + ", password=" + password + '}';
     }
-
-    
-
-    
 
 }

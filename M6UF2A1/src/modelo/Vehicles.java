@@ -60,7 +60,7 @@ public class Vehicles implements Serializable {
     private Cliente propietari;
     @Column(name = "MARCA")
     private String marca;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POLISSA")
     private Polissa polissa;
 
@@ -82,19 +82,19 @@ public class Vehicles implements Serializable {
         this.polissa = polissa;
     }
 
-    
-    
     public Vehicles() {
     }
 
-    public Vehicles(int id) {
+    public Vehicles(int id, String model, String matricula, int anyfabricacio, Cliente propietari, String marca) {
         this.id = id;
+        this.model = model;
+        this.matricula = matricula;
+        this.anyfabricacio = anyfabricacio;
+        this.propietari = propietari;
+        this.marca = marca;
     }
 
-    public Vehicles(int id, String matricula) {
-        this.id = id;
-        this.matricula = matricula;
-    }
+    
 
     public int getId() {
         return id;
@@ -174,7 +174,4 @@ public class Vehicles implements Serializable {
         return "Vehicles{" + "id=" + id + ", model=" + model + ", matricula=" + matricula + ", anyfabricacio=" + anyfabricacio + ", marca=" + marca + '}';
     }
 
-    
-
-    
 }

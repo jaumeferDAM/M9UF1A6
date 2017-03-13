@@ -16,7 +16,8 @@ import modelo.Asseguradora;
  * @author Jaume
  */
 public class Asseguradora_controller {
-     public void Insertar(Asseguradora a) {
+
+    public void Insertar(Asseguradora a) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();

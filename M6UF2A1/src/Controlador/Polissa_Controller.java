@@ -16,6 +16,7 @@ import modelo.Polissa;
  * @author Jaume
  */
 public class Polissa_Controller {
+
     public void Insertar(Polissa a) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
@@ -99,6 +100,87 @@ public class Polissa_Controller {
         em.close();
 
         return a;
+    }
+    
+    public List BUSCALLISTA(long id) {
+        EntityManager em = new EM_Controller().getEntityManager();
+        System.out.println("Busqueda per id de Client");
+        Query query = em.createNamedQuery("cercaPolizasCliente", Polissa.class);
+        query.setParameter("id", id);
+        List<Polissa> lista = (List<Polissa>) query.getResultList();
+        System.out.println(lista);
+        System.out.println("close");
+        em.close();
+        return lista;
+}
+
+    public Polissa BuscarPolissaClient(int id) {
+        // Recupera el entity manager
+        EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("busqueda");
+        Query query = em.createNamedQuery("Polissa.findByTipus", Polissa.class);
+        query.setParameter("idCliente", id);
+        Polissa p = (Polissa) query.getSingleResult();
+//        Polissa a = (Polissa) em.find(Polissa.class, id);
+
+        System.out.println("close");
+        em.close();
+
+        return p;
+    }
+
+    public Polissa BuscarPolissaVehicle(int id) {
+        // Recupera el entity manager
+        EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("busqueda");
+        Query query = em.createNamedQuery("Polissa.findVehicle", Polissa.class);
+        query.setParameter("idVehicle", id);
+        Polissa p = (Polissa) query.getSingleResult();
+//        Polissa a = (Polissa) em.find(Polissa.class, id);
+
+        System.out.println("close");
+        em.close();
+
+        return p;
+    }
+    
+        public void EliminarPolissaClient(List lista) {
+        EM_Controller oem = new EM_Controller();
+        EntityManager em = oem.getEntityManager();
+        EntityTransaction etx = em.getTransaction();
+        System.out.println("begin");
+        etx.begin();
+
+        System.out.println("remove");
+        for (Object object : lista) {
+            em.remove(em.contains(object) ? object : em.merge(object));
+        }
+
+        System.out.println("commit");
+        //em.getTransaction().commit();
+        etx.commit();
+
+        System.out.println("close");
+        em.close();
+
+}
+        
+
+    public List<Polissa> BuscarPolissaVigents() {
+        // Recupera el entity manager
+        EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("busqueda");
+        Query query = em.createNamedQuery("Polissa.findVigente", Polissa.class);
+        List<Polissa> p = (List<Polissa>) query.getResultList();
+//        Polissa a = (Polissa) em.find(Polissa.class, id);
+
+        System.out.println("close");
+        em.close();
+
+        return p;
     }
 
     public void Consulta() {
