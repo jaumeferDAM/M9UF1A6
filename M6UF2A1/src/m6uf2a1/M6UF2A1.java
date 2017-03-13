@@ -116,15 +116,37 @@ public class M6UF2A1 {
          Vehicles vehiModificar = vehicle_controller.Buscar(1821); 
             vehiModificar.setMarca("Opel");
             vehicle_controller.Modificar(vehiModificar);
-            Vehicles vehiPerEliminar = vc.Buscar(2141);
+            Vehicles vehiPerEliminar = vehicle_controller.Buscar(2141);
             //Eliminar la polissa 
-            Polissa poliEliminar = pc.BuscarPerVehicle(vehiPerEliminar.getVehicleId()); //Busquem la polissa a la qual esta vinculat el vehicle
-            pc.Eliminar(poliEliminar);//Eliminem la polissa
-            vc.Eliminar(vehiPerEliminar);//Eliminem el vehicle un cop ja no te cap relacio amb cap altre taula.
-            System.out.println("Si busquem ara no existeix: " + vc.Buscar(vehiPerEliminar.getVehicleId()));
-            System.out.println(pc.BuscarPerVehicle(vc.Buscar(2141L).getVehicleId()));//Realitzem una cerca de polissas que te el vehicle
-System.out.println(vc.cercaVehicleMatricula("213456"));
-               
+            Polissa poliEliminar = polissa_Controller.BuscarPolissaVehicle(vehiPerEliminar.getId());
+            polissa_Controller.Eliminar(poliEliminar);
+            vehicle_controller.Eliminar(vehiPerEliminar);
+            
+            
+    //Asseguradora
+    
+    
+        //Crear una asseguradora
+        Asseguradora asseguradora = new Asseguradora(0, "Ocaso", "NIF");
+        //Cojer la poliza que tendra asseguradora
+        List<Polissa> polizas = new ArrayList<>();
+        polizas.add((Polissa) polissas1);
+        asseguradora.setPolissa(polizas);
+        //Insertamos la asseguradora
+        asseguradora_controller.Insertar(asseguradora);
+        //Creamos otra con el id anterior para modificarla
+        Asseguradora asseguradoraMod = asseguradora_controller.Buscar(1301);
+        asseguradoraMod.setNif("NIF1");
+        asseguradora_controller.Modificar(asseguradoraMod);
+        
+        asseguradoraMod.setPolissa(null);
+        Asseguradora elimAsseguradora = asseguradora_controller.Buscar(1301);
+        asseguradora_controller.Eliminar(elimAsseguradora);
+        
+        
+
+        
+        
         
     }
 

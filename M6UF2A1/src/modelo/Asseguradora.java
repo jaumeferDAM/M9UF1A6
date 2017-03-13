@@ -58,18 +58,13 @@ public class Asseguradora implements Serializable {
         this.polissa = polissa;
     }
 
-    public Asseguradora(String nom, String nif, List<Polissa> polissa) {
-        this.nom = nom;
-        this.nif = nif;
-        this.polissa = polissa;
-    }
-
-    public Asseguradora(int id, String nom, String nif, List<Polissa> polissa) {
+    public Asseguradora(int id, String nom, String nif) {
         this.id = id;
         this.nom = nom;
         this.nif = nif;
-        this.polissa = polissa;
     }
+
+    
 
     public Asseguradora() {
     }
