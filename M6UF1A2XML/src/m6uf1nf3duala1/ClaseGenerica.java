@@ -39,7 +39,7 @@ public class ClaseGenerica extends ClaseAbstracta{
     StreamResult result;
     DOMSource source;
 
-    public ClaseGenerica(DocumentBuilder documentBuilder, Document doc, Transformer trns, StreamResult result, DOMSource source, String rutaDocument) throws ParserConfigurationException, SAXException, IOException {
+    public ClaseGenerica(DocumentBuilder documentBuilderz, Document doc, Transformer trns, StreamResult result, DOMSource source, String rutaDocument) throws ParserConfigurationException, SAXException, IOException {
         super(rutaDocument);
         this.documentBuilder = documentBuilder;
         this.doc = doc;
