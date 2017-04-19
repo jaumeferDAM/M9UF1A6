@@ -34,7 +34,7 @@ public class SeguretatAES {
     }
     
    void xifrarFitxer(String fitxer, SecretKey clau) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-       
+       //push
         Cipher cipher = Cipher.getInstance(fitxer);
         cipher.init(Cipher.ENCRYPT_MODE, clau);
         
