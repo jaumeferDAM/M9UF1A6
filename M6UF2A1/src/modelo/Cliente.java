@@ -90,8 +90,6 @@ public class Cliente implements Serializable {
         this.adreca = adreca;
         this.vehicles = vehicles;
     }
-    
-    
 
     public Cliente() {
     }

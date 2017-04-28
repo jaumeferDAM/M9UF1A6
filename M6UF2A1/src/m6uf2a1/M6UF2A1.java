@@ -50,9 +50,8 @@ public class M6UF2A1 {
 
         //Crear una adreca per afegir al client
         Adreca adreca = new Adreca("una", 42, "Barbera");
-  
-  //USUARI
-   
+
+        //USUARI
         //Crear un usuari
         Usuari u1 = new Usuari("admin", "1234");
         //insertar l'usuari
@@ -67,10 +66,8 @@ public class M6UF2A1 {
         Usuari u3 = usuari_Controller.Buscar("admin");
         //Eliminem l'usuari
         usuari_Controller.Eliminar(u3);
-        
-   //CLIENTE
 
-        
+        //CLIENTE
         //Crear un client
         Cliente C1 = new Cliente(0, "Matias", 98975445L, adreca);
         //insertar l'client
@@ -84,7 +81,6 @@ public class M6UF2A1 {
 //        //Creem un altre client per eliminar
         Cliente c3 = controller_cliente.buscar(1421);
 
-        
         /* Hay que eliminar todas las relaciones
         Guardar las polizas del cliente */
         List<Polissa> polissas1 = (List<Polissa>) polissa_Controller.BuscarPolissaClient(c3.getIdCliente());
@@ -106,26 +102,23 @@ public class M6UF2A1 {
         //Eliminem el client
         controller_cliente.Eliminar(c3);
 
-    //VEHICLE
+        //VEHICLE
         Cliente clientev = controller_cliente.buscar(1461);
         //Crear un vehiculo
         Vehicles v = new Vehicles(0, "Seat", "ffffff", 2005, clientev, "Cordoba");
         //Insertar el vehiculo
         vehicle_controller.Insertar(v);
         System.out.println(v);
-         Vehicles vehiModificar = vehicle_controller.Buscar(1821); 
-            vehiModificar.setMarca("Opel");
-            vehicle_controller.Modificar(vehiModificar);
-            Vehicles vehiPerEliminar = vehicle_controller.Buscar(2141);
-            //Eliminar la polissa 
-            Polissa poliEliminar = polissa_Controller.BuscarPolissaVehicle(vehiPerEliminar.getId());
-            polissa_Controller.Eliminar(poliEliminar);
-            vehicle_controller.Eliminar(vehiPerEliminar);
-            
-            
-    //Asseguradora
-    
-    
+        Vehicles vehiModificar = vehicle_controller.Buscar(1821);
+        vehiModificar.setMarca("Opel");
+        vehicle_controller.Modificar(vehiModificar);
+        Vehicles vehiPerEliminar = vehicle_controller.Buscar(2141);
+        //Eliminar la polissa 
+        Polissa poliEliminar = polissa_Controller.BuscarPolissaVehicle(vehiPerEliminar.getId());
+        polissa_Controller.Eliminar(poliEliminar);
+        vehicle_controller.Eliminar(vehiPerEliminar);
+
+        //Asseguradora
         //Crear una asseguradora
         Asseguradora asseguradora = new Asseguradora(0, "Ocaso", "NIF");
         //Cojer la poliza que tendra asseguradora
@@ -138,16 +131,11 @@ public class M6UF2A1 {
         Asseguradora asseguradoraMod = asseguradora_controller.Buscar(1301);
         asseguradoraMod.setNif("NIF1");
         asseguradora_controller.Modificar(asseguradoraMod);
-        
+
         asseguradoraMod.setPolissa(null);
         Asseguradora elimAsseguradora = asseguradora_controller.Buscar(1301);
         asseguradora_controller.Eliminar(elimAsseguradora);
-        
-        
 
-        
-        
-        
     }
 
 }

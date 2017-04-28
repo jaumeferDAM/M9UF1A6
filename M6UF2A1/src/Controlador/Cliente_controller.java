@@ -31,17 +31,17 @@ public class Cliente_controller {
 
         // El persistim a la base de dades
 //        em.getTransaction().begin();
-        EntityTransaction etx = em.getTransaction();
+        EntityTransaction et = em.getTransaction();
 
         System.out.println("begin");
-        etx.begin();
+        et.begin();
 
         System.out.println("persist");
         em.persist(cliente1);
 
         System.out.println("commit");
         //em.getTransaction().commit();
-        etx.commit();
+        et.commit();
 
         System.out.println("close");
         em.close();
